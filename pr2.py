@@ -8,11 +8,12 @@ Creation date:		Jul-14th-2019
 Description:		This module contains the functions that pr3.py needs to output the files in
 					different formats.
 
-Notes: 				Recquires the libraries json, BeautifuSoup, and Comment
+Notes: 				Recquires the libraries json, BeautifuSoup, time, and Comment
  
 ---------------------------------------------------------------------------------------------------'''
 
 import json
+import time
 from bs4 import BeautifulSoup
 from bs4 import Comment
 
@@ -30,6 +31,14 @@ def getTitle(soupObject):
 
 	return title
 
+def getTime():
+
+	'''
+	'''
+
+	t = time.strftime('%a, %d %b %Y %H:%M:%S')
+
+	return t
 
 
 def createHTMLFile( url, soupObject ):
@@ -39,6 +48,7 @@ def createHTMLFile( url, soupObject ):
 	'''
 
 	my_title = getTitle(soupObject)
+	my_time = getTime()
 
 	#Makes BeautifulSoup instances more readable.
 	p_soup_html = soupObject.prettify()
@@ -46,7 +56,7 @@ def createHTMLFile( url, soupObject ):
 
 	with open('%s.html' %my_title , 'w', encoding= 'utf-8') as file:
 
-		file.writelines('<!--\nWebpage title: ' + my_title + '\n' + 'Webpage extracted from: ' + url + '\n' + '-->' + '\n\n')
+		file.writelines('<!--\nWebpage title: ' + my_title + ';\n' + 'Webpage extracted from: ' + url + ';\n' + 'Webpage time extraction: ' + my_time + ';\n' +'-->' + '\n\n')
 		file.writelines(p_soup_html)
 		file.close()
 
@@ -59,6 +69,7 @@ def createTXTFile( url, soupObject ):
 	'''
 
 	my_title = getTitle(soupObject)
+	my_time = getTime()
 
 	#Makes BeautifulSoup instances more readable.
 	p_soup_html = soupObject.prettify()
@@ -66,7 +77,7 @@ def createTXTFile( url, soupObject ):
 
 	with open('%s.txt' %my_title , 'w', encoding= 'utf-8') as file:
 
-		file.writelines('<!--\nWebpage title: ' + my_title + '\n' + 'Webpage extracted from: ' + url + '\n' + '-->' + '\n\n')
+		file.writelines('<!--\nWebpage title: ' + my_title + ';\n' + 'Webpage extracted from: ' + url + ';\n' + 'Webpage time extraction: ' + my_time + ';\n' + '-->' + '\n\n')
 		file.writelines(p_soup_html)
 		file.close()
 
@@ -79,6 +90,7 @@ def createXMLFile( url, soupObject ):
 	'''
 
 	my_title = getTitle(soupObject)
+	my_time = getTime()
 
 	#Makes BeautifulSoup instances more readable.
 	p_soup_html = soupObject.prettify()
@@ -86,7 +98,7 @@ def createXMLFile( url, soupObject ):
 
 	with open('%s.xml' %my_title , 'w', encoding= 'utf-8') as file:
 
-		file.writelines('<!--\nWebpage title: ' + my_title + '\n' + 'Webpage extracted from: ' + url + '\n' + '-->' + '\n\n')
+		file.writelines('<!--\nWebpage title: ' + my_title + ';\n' + 'Webpage extracted from: ' + url + ';\n' + 'Webpage time extraction: ' + my_time + ';\n' + '-->' + '\n\n')
 		file.writelines(p_soup_html)
 		file.close()
 
@@ -100,10 +112,11 @@ def createJSONfile( url, soupObject ):
 	'''
 
 	my_title = getTitle(soupObject)
+	my_time = getTime()
 
 	#Adding comments to the BeautifulSoup object.
 	tag = soupObject.html
-	new_comment = Comment('\nWebpage title: ' + my_title + '\n' + 'Webpage extracted from: ' + url + '\n\n')	
+	new_comment = Comment('\nWebpage title: ' + my_title + ';\n' + 'Webpage extracted from: ' + url + ';\n' + 'Webpage time extraction: ' + my_time + ';\n\n')	
 	tag.insert_before(new_comment)
 
 	#Make the soup object readable. 

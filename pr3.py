@@ -22,7 +22,6 @@ import pr2
 ## VARIABLE DECLARATION ##
 
 formats_ref = ["html", "txt", "xml", "json", "all"]       #List holding the right formats to the user prompt for formats. 
-url=''                                                    #Holds the url the user introduces.
 
 
 ## REQUESTING INFORMATION FROM USER ##
@@ -91,8 +90,3 @@ else:
 		pr2.createOutputFile(f, url, html_doc)
 
 		
-
-
-
-
-
